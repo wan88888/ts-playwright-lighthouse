@@ -1,0 +1,32 @@
+{
+  "name": "ts-playwright-lighthouse",
+  "version": "1.0.0",
+  "description": "使用Playwright和Lighthouse测量网页性能和可访问性",
+  "main": "index.js",
+  "scripts": {
+    "test": "ts-node src/index.ts",
+    "build": "tsc"
+  },
+  "keywords": [
+    "playwright",
+    "lighthouse",
+    "performance",
+    "accessibility"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@playwright/test": "^1.40.0",
+    "lighthouse": "^11.0.0",
+    "chrome-launcher": "^0.15.2",
+    "fs-extra": "^11.1.1",
+    "yargs": "^17.7.2",
+    "chalk": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.2",
+    "@types/node": "^20.8.10",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}

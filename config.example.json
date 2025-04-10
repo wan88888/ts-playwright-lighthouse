@@ -1,0 +1,12 @@
+{
+  "url": "https://playwright.dev",
+  "testCount": 3,
+  "categories": ["performance", "accessibility", "best-practices", "seo"],
+  "device": "Mobile",
+  "throttling": {
+    "cpuSlowdownMultiplier": 4,
+    "downloadThroughputKbps": 1638.4,
+    "uploadThroughputKbps": 768,
+    "rttMs": 150
+  }
+}

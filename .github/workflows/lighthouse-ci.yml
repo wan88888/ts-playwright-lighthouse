@@ -1,0 +1,46 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  # schedule:
+  #   # 每天凌晨3点运行
+  #   - cron: '0 3 * * *'
+  # 允许手动触发工作流
+  workflow_dispatch:
+
+jobs:
+  lighthouse-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: 设置 Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: 安装依赖
+        run: npm ci
+      
+      - name: 构建项目
+        run: npm run build
+      
+      - name: 运行 Lighthouse 测试
+        run: node dist/index.js --config config.example.json
+      
+      - name: 上传测试报告
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: reports/
+          retention-days: 14
+      
+      # 如果需要，可以添加发送通知的步骤
+      - name: 检查性能退化
+        if: ${{ failure() }}
+        run: |
+          echo "::warning::Lighthouse 测试检测到性能退化，请查看报告详情。"
