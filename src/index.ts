@@ -1,6 +1,7 @@
 // @ts-nocheck 忽略整个文件的类型检查问题
 import { chromium, devices } from '@playwright/test';
-import lighthouse from 'lighthouse';
+// 移除静态导入，改为后面使用动态导入
+// import lighthouse from 'lighthouse';
 import * as chromeLauncher from 'chrome-launcher';
 import * as fs from 'fs-extra';
 import * as path from 'path';
@@ -225,8 +226,9 @@ async function runLighthouseTest() {
       logger.info(`\n运行第 ${i}/${config.testCount} 次Lighthouse测试...`);
       progressBar.update(i - 1, `测试中...`);
       
-      // 使用lighthouse API
-      const runnerResult = await lighthouse(config.url, options) as LighthouseResult;
+      // 使用lighthouse API - 动态导入ES模块
+      const lighthouse = await import('lighthouse');
+      const runnerResult = await lighthouse.default(config.url, options) as LighthouseResult;
       
       // 保存每次测试的HTML报告
       const timestamp = new Date().toISOString().replace(/:/g, '-');
